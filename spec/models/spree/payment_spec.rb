@@ -37,11 +37,6 @@ describe Spree::Payment do
         subject
         expect(payment.source).to be_a(Spree::CreditCard)
       end
-
-      it 'should have has_encrypted_values? false' do
-        subject
-        expect(payment.source.has_encrypted_values?).to be_false
-      end
     end
 
     context 'when encrypted_values is true' do

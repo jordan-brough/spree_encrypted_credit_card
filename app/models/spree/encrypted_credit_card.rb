@@ -14,8 +14,9 @@ module Spree
     before_save       :stash_encrypted_values!
     after_save        :restore_encrypted_values!
 
-    def initialize(attributes)
-      super(attributes)
+    after_initialize :init_stash
+
+    def init_stash
       @encrypted_values_stash = {}
       @encrypted_values_stash[:valid] = {}
       @encrypted_values_stash[:db] = {}
@@ -27,6 +28,14 @@ module Spree
       else
         super(num)
       end
+    end
+
+    def has_encrypted_values?
+      encrypted_values
+    end
+
+    def encrypted_values=(b)
+      @encrypted_values = b
     end
 
     def encrypted_values
