@@ -1,5 +1,5 @@
-Spree Encrypted CreditCard
-=========================
+Spree Encrypted Credit Card
+===========================
 
 This gem modifies Spree to support end to end Credit Card encryption, as supported by Braintree. Currently, Spree does not work with Braintree's style of encryption due to all of the validations and table constraints for Spree::CreditCard.
 
@@ -84,4 +84,4 @@ To Do
 * Work with Spree community to see if/how this can ever be merged back to Spree.
 * Additional support for other gateways that do Braintree style end to end encryption/decryption.
 
-Copyright (c) 2014 [name of extension creator], released under the New BSD License
+Copyright (c) 2014 [HoyaBoya], released under the New BSD License
