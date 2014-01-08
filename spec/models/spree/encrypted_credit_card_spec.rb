@@ -17,35 +17,53 @@ describe Spree::EncryptedCreditCard do
   end
 
   describe '#valid?' do
+
     let(:credit_card) do
       Spree::EncryptedCreditCard.new(valid_credit_card_attributes.merge(
         month: 'i am a month',
         year: 'i am a year',
-        encrypted_values: true
+        encrypted_values: encrypted_values
       ))
     end
-  
+
     subject { credit_card.valid? }
 
-    it 'should not validate month' do
-      credit_card.month = 'i am a month'
-      credit_card.valid?
-      expect(subject).to be_true
+    context 'when encrypted_values is true' do
+      let(:encrypted_values)  { true }
+      it 'should not validate month' do
+        credit_card.month = 'i am a month'
+        credit_card.valid?
+        expect(subject).to be_true
+      end
+
+      it 'should not validate year' do
+        credit_card.month = 'i am a year'
+        expect(subject).to be_true
+      end
+
+      it 'should restore month' do
+        subject
+        expect(credit_card.month).to eq('i am a month')
+      end
+
+      it 'should restore year' do
+        subject
+        expect(credit_card.year).to eq('i am a year')
+      end
     end
 
-    it 'should not validate year' do
-      credit_card.month = 'i am a year'
-      expect(subject).to be_true
-    end
+    context 'when encrypted_values is false' do
+      let(:encrypted_values)  { false }
 
-    it 'should restore month' do
-      subject
-      expect(credit_card.month).to eq('i am a month')
-    end
+      it 'should not be valid' do
+        expect(subject).to be_false
+      end
 
-    it 'should restore year' do
-      subject
-      expect(credit_card.year).to eq('i am a year')
+      it 'should have errors' do
+        subject
+        expect(credit_card.errors[:month]).to_not be_nil
+        expect(credit_card.errors[:year]).to_not be_nil
+      end
     end
   end
 
