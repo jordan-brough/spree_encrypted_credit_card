@@ -12,7 +12,7 @@ module Spree
     # A bit of duplication but create_profile is consistent across all gateways.
     # Let's override here rather than update_card_number which feels more brittle.
     #
-    # God I miss Java @abstract :)
+    # God I miss Java @Overrides and abstract :)
     #
     def create_profile(payment)
       if payment.source.gateway_customer_profile_id.nil?
