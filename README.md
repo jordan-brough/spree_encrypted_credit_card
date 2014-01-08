@@ -27,7 +27,7 @@ This is all performed by ActiveRecord callbacks. The data is all restored during
 
 This allows the encrypted data to be passed through to Braintree as is and not be mangled by Spree.
 
-Braintree than returns the decrypted values. This Gem also decorates the Braintree gateway provided by Spree Gateway to set both the decrypted CC number and decrypted epxiry date.
+Braintree than returns the decrypted values. This Gem also provides an EncryptedBraintreeGateway which you must pick in Spree Admin during payment method setup. This object extends BraintreeGateway but properly sets all of the decrypted values.
 
 This was the cleanest way (that I know of) for dealing with sub-class changes to parent Active Record validations and functionality, and was preferred over extensive meta programming into the Spree::CreditCard validation chains and CRUD methods to make it work the way we wanted.
 
@@ -46,6 +46,11 @@ An example JS file using Braintree's JS is here:
 
 https://gist.github.com/HoyaBoya/9e98c07e3ba84f51c952
 
+In Spree Admin for payment methods, select the provider as Spree::Gateway::EncryptedBraintreeGateway. Fill out the rest of the Braintree information as you would with the standard Braintree Gateway.
+
+```
+http://localhost:3000/admin/payment_methods/new
+```
 
 Installation
 ------------

@@ -1,9 +1,9 @@
 require 'spec_helper' 
 
-describe Spree::Gateway::BraintreeGateway do
+describe Spree::Gateway::EncryptedBraintreeGateway do
 
   before do
-    @gateway = Spree::Gateway::BraintreeGateway.create!(:name => "Braintree Gateway", :environment => "sandbox", :active => true)
+    @gateway = Spree::Gateway::EncryptedBraintreeGateway.create!(:name => "Encrypted Braintree Gateway", :environment => "sandbox", :active => true)
 
     @credit_card = Spree::EncryptedCreditCard.new
 
@@ -12,16 +12,22 @@ describe Spree::Gateway::BraintreeGateway do
     @payment.source = @credit_card
   end
 
-  describe '#update_card_number' do
+  describe '#payment_source' do
+    it 'should be Spree::EncryptedCreditCard' do
+      expect(@gateway.payment_source_class).to eql(Spree::EncryptedCreditCard)
+    end
+  end
+
+  describe '#update_cc_data' do
     let(:credit_card_response) do
       { 'token' => 'testing', 'last_4' => '1234', 'masked_number' => '5555**5555', 'expiration_date' => '01/2015' }
     end
 
     before do
-      @gateway.should_receive(:original_update_card_number).once
+      @gateway.should_receive(:update_card_number).once.with(@payment.source, credit_card_response)
     end
   
-    subject { @gateway.update_card_number(@payment.source, credit_card_response) }
+    subject { @gateway.update_cc_data(@payment.source, credit_card_response) }
 
     it "updates expiry" do
       subject
