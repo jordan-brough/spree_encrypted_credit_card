@@ -14,7 +14,7 @@ module SpreeEncryptedCreditCard
 
     def self.activate
       Dir.glob(File.join(File.dirname(__FILE__), '../../app/**/*.rb')) do |c|
-        Rails.configuration.cache_classes ? require(c) : load(c)
+        require(c)
       end
     end
 
