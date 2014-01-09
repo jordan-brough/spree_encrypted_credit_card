@@ -1,5 +1,7 @@
+require 'spree/core'
+
 module Spree
-  class EncryptedCreditCard < Spree::CreditCard
+  class EncryptedCreditCard < ::Spree::CreditCard
 
     ##
     # We can't (easily) override validations in Spree::CreditCard so we create callbacks to fake the data before valid?
