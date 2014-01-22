@@ -13,9 +13,6 @@ module SpreeEncryptedCreditCard
     end
 
     def self.activate
-      Dir.glob(File.join(File.dirname(__FILE__), '../../app/**/*.rb')) do |c|
-        require(c)
-      end
     end
 
     config.to_prepare &method(:activate).to_proc
