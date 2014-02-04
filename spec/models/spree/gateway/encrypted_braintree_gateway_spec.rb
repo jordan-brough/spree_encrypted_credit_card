@@ -31,8 +31,8 @@ describe Spree::Gateway::EncryptedBraintreeGateway do
 
     it "updates expiry" do
       subject
-      @payment.source.month.should == '01'
-      @payment.source.year.should == '2015'
+      @payment.source.month.to_i.should == 1
+      @payment.source.year.to_i.should == 2015
     end
 
     it "sets encrypted_values to false" do
