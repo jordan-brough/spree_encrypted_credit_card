@@ -68,6 +68,12 @@ bundle
 bundle exec rails g spree_encrypted_credit_card:install
 ```
 
+Configure as needed. e.g.:
+
+```ruby
+SpreeEncryptedCreditCard::Configuration.set(auto_capture?: true)
+```
+
 Testing
 -------
 
