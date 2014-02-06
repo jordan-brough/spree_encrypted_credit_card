@@ -1,8 +1,6 @@
 module Spree
   class Gateway::EncryptedBraintreeGateway < Gateway::BraintreeGateway
 
-    delegate :auto_capture?, to: SpreeEncryptedCreditCard::Configuration
-
     ##
     # Use our new Spree::EncryptedCreditCard vs Spree::CreditCard
     #

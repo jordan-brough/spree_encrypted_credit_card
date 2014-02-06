@@ -40,12 +40,4 @@ describe Spree::Gateway::EncryptedBraintreeGateway do
       @payment.source.encrypted_values.should be_false
     end
   end
-
-  describe "#auto_capture?" do
-    it "uses the configuration" do
-      expected = "AUTO_CAPTURE_CONFIG"
-      SpreeEncryptedCreditCard::Configuration.stub(:auto_capture?).and_return(expected)
-      expect(subject.auto_capture?).to eq expected
-    end
-  end
 end
