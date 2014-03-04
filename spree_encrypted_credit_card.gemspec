@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_encrypted_credit_card'
-  s.version     = '2.1.3'
+  s.version     = '2.2.0'
   s.summary     = 'Support End To End Credit Card Encryption'
   s.description = 'This gem modifies Spree and Spree Gateway to support CC Encryption For Braintree'
   s.required_ruby_version = '>= 1.9.3'
@@ -15,9 +15,9 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '~> 2.1.3'
+  s.add_dependency 'spree_core', '~> 2.2.0'
 
-  s.add_development_dependency 'rails', '4.0.1'
+  s.add_development_dependency 'rails', '~> 4.0.3'
   s.add_development_dependency 'capybara', '~> 2.1'
   s.add_development_dependency 'coffee-rails'
   s.add_development_dependency 'database_cleaner'
