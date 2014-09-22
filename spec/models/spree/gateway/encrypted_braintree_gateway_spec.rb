@@ -40,4 +40,16 @@ describe Spree::Gateway::EncryptedBraintreeGateway do
       @payment.source.encrypted_values.should be_false
     end
   end
+
+  describe "#map_billing_address" do
+    it "works correctly with US addresses and their state info" do
+      address = Spree::Address.new(address1: '123 Pleasant Lane', city: 'Montreal', state: Spree::State.new(abbr: 'NY'), zipcode: '12345', country: Spree::Country.new(name: 'United States'))
+      @gateway.send(:map_billing_address, address)[:state].should == 'NY'
+    end
+
+    it "works correctly with international addresses and their state info" do
+      address = Spree::Address.new(address1: '123 Pleasant Lane', city: 'Montreal', state_name: 'Quebec', zipcode: '12345', country: Spree::Country.new(name: 'Canada'))
+      @gateway.send(:map_billing_address, address)[:state].should == 'Quebec'
+    end
+  end
 end

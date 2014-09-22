@@ -51,7 +51,7 @@ module Spree
         :address1 => address.address1,
         :address2 => address.address2,
         :city => address.city,
-        :state => address.state.abbr,
+        :state => address.state_text,
         :zip => address.zipcode,
         :country_name => address.country.name
       }
